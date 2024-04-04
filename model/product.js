@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 
 const productSchema = new Schema({
-    id: {type:Number,min:[0,'Id is not correct'],max:[50,'Id is to high']},
+    id: {type:Number,min:[0,'Id is not correct'],max:[5000,'Id is to high']},
     title: {type:String,required:true},
     description: String,
     price: {type:Number,required:true,min:[50,'Price is to low']},

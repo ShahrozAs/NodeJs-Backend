@@ -13,41 +13,32 @@ exports.createProduct = async(req, res) => {
   res.json(saveProduct);
 };
 
-exports.getAllPrducts = (req, res) => {
-  res.json(products);
+exports.getAllPrducts = async(req, res) => {
+  const allProduct=await Product.find();
+  res.json(allProduct);
 };
 
-exports.getOneProduct = (req, res) => {
+exports.getOneProduct = async(req, res) => {
   // console.log(req.params.id);
   const id = +req.params.id;
-  const product = products.find((p) => p.id === id);
+const product=await Product.findOne({'id':id}).exec();
   res.json(product);
 };
 
-exports.replaceProduct = (req, res) => {
+exports.replaceProduct =async (req, res) => {
   const id = +req.params.id;
-  const productIndex = products.findIndex((p) => p.id === id);
-  const modifiedProduct = products.splice(productIndex, 1, {
-    ...req.body,
-    id: id,
-  });
-  res.json(modifiedProduct);
+  const replaceProduct=await Product.findOneAndReplace({'id':id},req.body,)
+  res.json(replaceProduct);
 };
 
-exports.updateProduct = (req, res) => {
+exports.updateProduct =async (req, res) => {
   const id = +req.params.id;
-  const productIndex = products.findIndex((p) => p.id === id);
-  const product = products[productIndex];
-  const modifiedProduct = products.splice(productIndex, 1, {
-    ...product,
-    ...req.body,
-  });
-  res.status(201).json(modifiedProduct);
+ const updateProduct=await Product.findOneAndUpdate({'id':id},req.body)
+  res.status(201).json(updateProduct);
 };
 
-exports.deleteProduct = (req, res) => {
+exports.deleteProduct = async(req, res) => {
   const id = +req.params.id;
-  const productIndex = products.findIndex((p) => p.id === id);
-  const modifiedProduct = products.splice(productIndex, 1);
-  res.status(201).json(modifiedProduct);
+ const deleteProduct=await Product.findOneAndDelete({'id':id});
+  res.status(201).json(deleteProduct);
 };
