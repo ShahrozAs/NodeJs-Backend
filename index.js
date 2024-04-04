@@ -1,7 +1,7 @@
 
 
+const express = require('express');
 require('dotenv').config()
-const express = require("express");
 const server = express();
 const productRouter=require('./routes/product')
 const userRouter=require('./routes/user')
@@ -15,13 +15,14 @@ async function main() {
    console.log('Database connected');
   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 }
-
 //bodyparser read from body json data
 server.use(express.json());
 //Static Hosting
-server.use(express.static("public"));
+server.use(express.static('public'));
 server.use('/products',productRouter.router);
 server.use('/users',userRouter.router);
+
+
 
 
 
