@@ -27,13 +27,13 @@ const product=await Product.findOne({'id':id}).exec();
 
 exports.replaceProduct =async (req, res) => {
   const id = +req.params.id;
-  const replaceProduct=await Product.findOneAndReplace({'id':id},req.body,)
+  const replaceProduct=await Product.findOneAndReplace({'id':id},req.body,{new:true})
   res.json(replaceProduct);
 };
 
 exports.updateProduct =async (req, res) => {
   const id = +req.params.id;
- const updateProduct=await Product.findOneAndUpdate({'id':id},req.body)
+ const updateProduct=await Product.findOneAndUpdate({'id':id},req.body,{new:true})
   res.status(201).json(updateProduct);
 };
 
