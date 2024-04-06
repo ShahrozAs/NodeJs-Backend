@@ -26,19 +26,20 @@ const product=await Product.findOne({'id':id}).exec();
 };
 
 exports.replaceProduct =async (req, res) => {
-  const id = +req.params.id;
-  const replaceProduct=await Product.findOneAndReplace({'id':id},req.body,{new:true})
+  const id = req.params.id;
+  const replaceProduct=await Product.findOneAndReplace({_id:id},req.body,{new:true})
   res.json(replaceProduct);
 };
 
 exports.updateProduct =async (req, res) => {
-  const id = +req.params.id;
- const updateProduct=await Product.findOneAndUpdate({'id':id},req.body,{new:true})
+  const id = req.params.id;
+ const updateProduct=await Product.findOneAndUpdate({_id:id},req.body,{new:true})
   res.status(201).json(updateProduct);
 };
 
 exports.deleteProduct = async(req, res) => {
-  const id = +req.params.id;
- const deleteProduct=await Product.findOneAndDelete({'id':id});
+  const id = req.params.id;
+  console.log(id)
+ const deleteProduct=await Product.findOneAndDelete({_id:id});
   res.status(201).json(deleteProduct);
 };
